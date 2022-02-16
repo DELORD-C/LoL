@@ -19,6 +19,7 @@ class App {
         $this->db = new Db($this->env->db, $this->env->test);
         $this->api = new Api($this->env->lang, $this->env->test);
         $this->view = new View();
+        $this->router = new Router($this->view);
         $this->checkVersion();
     }
 
@@ -49,7 +50,7 @@ class App {
             header("Refresh:3");
         }
         else {
-            $this->route();
+            $this->router->route();
         }
     }
 
@@ -63,12 +64,6 @@ class App {
             ini_set('display_errors', 0);
             ini_set('display_startup_errors', 0);
             error_reporting(0);
-        }
-    }
-
-    function route() {
-        if (empty($_POST) && empty($_GET)) {
-            $this->view->render('index');
         }
     }
 }
