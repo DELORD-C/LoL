@@ -93,7 +93,6 @@ function goDownSearch() {
 }
 
 function goUpSearch() {
-    console.log('test')
     let old = document.getElementsByClassName('linkTargeted')[0],
         elems = document.getElementsByClassName('block'),
         array = [],
