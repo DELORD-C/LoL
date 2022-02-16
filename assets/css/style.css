@@ -176,7 +176,7 @@ video#bgVid {
 #prefill {
   position: absolute;
   width: 100%;
-  top: 100%;
+  top: calc(100% - 1px);
   text-align: left;
   transition: 0.2s;
   min-height: 40px;
@@ -204,7 +204,7 @@ video#bgVid {
 
 #prefill .linkTargeted {
   color: #fff;
-  background: #0d0d0e;
+  background: #8515d9;
 }
 
 .form-floating {
@@ -217,4 +217,8 @@ video#bgVid {
 
 #prefill .none {
   display: none;
+}
+
+.form-control:focus {
+  border-color: #9866e9;
 }
