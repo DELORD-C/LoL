@@ -245,4 +245,10 @@ class Db {
         $query->execute();
         return $query->fetchAll();
     }
+
+    function getChampion () {
+        $query = $this->dbh->prepare("SELECT * FROM champions WHERE LOWER(name) = ?") {
+            
+        }
+    }
 }
