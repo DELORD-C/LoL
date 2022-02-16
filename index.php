@@ -1,3 +1,3 @@
 <?php
 
-include "php/load.php";
+include "core/load.php";
