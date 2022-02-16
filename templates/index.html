@@ -8,7 +8,14 @@
     <h1 class="cover-heading">Welcome.</h1>
     <p class="lead">
       Bienvenue sur le framework LoL API, champions, sorts, items, stats, retrouvez toute la data dont vous avez besoin.
-      Et tout ça avec une charte graphique de qualité.</p>
+      Et tout ça avec performance et style.</p>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="Champion">
+        <label for="floatingInput" id="champ">Champion</label>
+        <div class="list-group" id="prefill">
+          {{champions}}
+        </div>
+      </div>
   </main>
 
   <footer class="mastfoot mt-auto">

@@ -1,29 +1,39 @@
 // JS FILE
 let video = document.getElementById('bgVid');
-video.addEventListener('loadeddata', function() {
+let bar = document.getElementById('loadBar')
+let intLoad = setInterval(() => {
     animLoad();
-    let intLoad = setInterval(() => {
-        animLoad();
-    }, 3500);
+}, 3500);
+
+let intPlay = setInterval(() => {
+    video.play();
+}, 100)
+
+animLoad();
+
+video.addEventListener('loadeddata', function() {
+    bar.style.width = "10%";
     setTimeout(() => {
-        clearInterval(intLoad);
-        loading.style.transition = '0.3s ease-in-out';
-        loading.style.background = 'transparent';
-        loading.style.color = 'transparent';
+        bar.style.width = "30%";
         setTimeout(() => {
-            loading.style.transition = '0.3s ease-in-out';
-            loading.style.opacity = '0';
-            loading.style.pointerEvents = 'none';
+            bar.style.width = "60%";
             setTimeout(() => {
-                loading.remove();
-            }, 1000);
-        }, 300);
-    }, 5000);
+                bar.style.width = "100%";
+                clearInterval(intLoad);
+                loading.style.transition = '0.3s ease-in-out';
+                loading.style.background = 'transparent';
+                loading.style.color = 'transparent';
+                loading.style.opacity = '0';
+                loading.style.pointerEvents = 'none';
+            }, 000);
+        }, 500);
+    }, 300);
  }, false);
 
  function animLoad () {
     let loading = document.getElementById('loading');
-    let spans = loading.children;
+    let loadingin = document.getElementById('loadingin');
+    let spans = loadingin.children;
     let timer = 150;
     for (span of spans) {
         let temp = span;

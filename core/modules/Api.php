@@ -5,8 +5,10 @@ class Api {
     private $data;
     private $url;
     private $test;
+    private $app;
 
-    function __construct (String $lang, Bool $test = false) {
+    function __construct (String $lang, App $app, Bool $test = false) {
+        $this->app = $app;
         $this->version = (object) [
             'version' => json_decode(file_get_contents("https://ddragon.leagueoflegends.com/api/versions.json"))[0],
             'lang' => $lang

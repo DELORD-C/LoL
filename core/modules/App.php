@@ -16,10 +16,10 @@ class App {
             $this->version = (object) ["version" => "Null", "lang" => ""];
         }
         $this->handleErrors();
-        $this->db = new Db($this->env->db, $this->env->test);
-        $this->api = new Api($this->env->lang, $this->env->test);
-        $this->view = new View();
-        $this->router = new Router($this->view);
+        $this->db = new Db($this->env->db, $this, $this->env->test);
+        $this->api = new Api($this->env->lang, $this, $this->env->test);
+        $this->view = new View($this);
+        $this->router = new Router($this->view, $this);
         $this->checkVersion();
     }
 
@@ -40,17 +40,17 @@ class App {
             $prev = $this->version->version . ' ' . $this->version->lang;
             $this->version = $this->api->getVersion();
             $next = $this->version->version . ' ' . $this->version->lang;
+            $this->db->updateAllDb($this->api);
+            $this->updateVersion();
+            header("Refresh:3");
             $this->view->render('update', [
                 'prev' => $prev,
                 'next' => $next,
                 'title' => "LoL API - Updated Database"
             ]);
-            $this->db->updateAllDb($this->api);
-            $this->updateVersion();
-            header("Refresh:3");
         }
         else {
-            $this->router->route();
+            $this->router->route($this);
         }
     }
 
@@ -65,5 +65,13 @@ class App {
             ini_set('display_startup_errors', 0);
             error_reporting(0);
         }
+    }
+
+    function getDb () {
+        return $this->db;
+    }
+
+    function getVersion () {
+        return $this->version;
     }
 }

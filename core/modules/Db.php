@@ -3,8 +3,10 @@
 class Db {
     private $dbh;
     private $test;
+    private $app;
 
-    function __construct (Object $db, Bool $test = false) {
+    function __construct (Object $db, App $app, Bool $test = false) {
+        $this->app = $app;
         $options = [
             \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
@@ -21,10 +23,12 @@ class Db {
 
     function updateAllDb ($api) {
         $this->reset();
+        $championsList = [];
         $champions = $api->getChampions();
         $items = $api->getItems();
         foreach ($champions as $champion) {
             $this->insertChampion($champion);
+            array_push($championsList, (object) ['name' => $champion->name, 'sprite' => $champion->image->sprite]);
             foreach ($champion->spells as $spell) {
                 $this->insertSpell($spell, $champion->key);
             }
@@ -234,5 +238,11 @@ class Db {
             echo $e->getMessage();
             throw new PDOException($e->getMessage() , $e->getCode());
         }
+    }
+
+    function getChampionList () {
+        $query = $this->dbh->prepare("SELECT name, full FROM champions");
+        $query->execute();
+        return $query->fetchAll();
     }
 }

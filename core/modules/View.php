@@ -2,11 +2,13 @@
 
 class View {
     private $css = '';
+    private $app = '';
     private $js = '';
     private $assetPath;
     private $assetFinalPath;
 
-    function __construct () {
+    function __construct (App $app) {
+        $this->app = $app;
         $this->assetPath = __DIR__ . '/../../assets/';
         $this->assetFinalPath = str_replace('\\', '/', realpath(dirname($this->assetPath)));
         $this->assetFinalPath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->assetFinalPath) . '/assets/';
@@ -57,5 +59,17 @@ class View {
             preg_match('/[^\/]+$/', $file, $match);
             $this->js .= '<script src="' . $this->assetFinalPath . 'js/' .$match[0] . '"></script>';
         }
+    }
+
+    function getChampionSearchList () {
+        $render = '';
+        foreach ($this->app->getDb()->getChampionList() as $champion) {
+            $render .= "
+            <a champion='" . $champion['name'] . "' class='list-group-item container' href='?champion=" . $champion['name'] . "'>
+                <img src='https://ddragon.leagueoflegends.com/cdn/" . $this->app->getVersion()->version . "/img/champion/" . $champion['full'] . "'>
+                " . $champion['name'] . "
+            </a>";
+        }
+        return $render;
     }
 }
