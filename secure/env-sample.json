@@ -5,5 +5,8 @@
         "name": "dbname",
         "user": "user",
         "password": "password"
-    }
+    },
+    "lang" : "en_EN",
+    "test" : "false",
+    "env" : "dev"
 }

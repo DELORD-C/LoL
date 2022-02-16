@@ -1,0 +1,26 @@
+**loading**
+<video autoplay muted loop id="bgVid">
+  <source src="{{media:Lunar.mp4}}" type="video/mp4">
+</video>
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column text-center">
+  **nav**
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Welcome.</h1>
+    <p class="lead">
+      Bienvenue sur le framework LoL API, champions, sorts, items, stats, retrouvez toute la data dont vous avez besoin.
+      Et tout ça avec performance et style.</p>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="Champion">
+        <label for="floatingInput" id="champ">Champion</label>
+        <div class="list-group" id="prefill">
+          {{champions}}
+        </div>
+      </div>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>League of Legend Tool made by <a href="https://twitch.tv/zulgard/">@Zulgard</a>.</p>
+    </div>
+  </footer>
+</div>
