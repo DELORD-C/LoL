@@ -246,9 +246,10 @@ class Db {
         return $query->fetchAll();
     }
 
-    function getChampion () {
-        $query = $this->dbh->prepare("SELECT * FROM champions WHERE LOWER(name) = ?") {
-            
-        }
+    function getChampion ($name) {
+        $query = $this->dbh->prepare("SELECT * FROM champions WHERE LOWER(name) = ?");
+        $query->bindParam(1, $name);
+        $query->execute();
+        return $query->fetch();
     }
 }

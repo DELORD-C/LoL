@@ -16,7 +16,8 @@ class Router {
         else if (!empty($_GET['champion'])) {
             $champion = $this->app->getDb()->getChampion($_GET['champion']);
             $this->view->render('champion', [
-                'title' => 'LoL API - '
+                'title' => 'LoL API - ' . $champion->name,
+                'champion' => $champion
             ]);
         }
         else {
